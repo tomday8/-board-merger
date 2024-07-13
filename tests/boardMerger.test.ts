@@ -79,4 +79,66 @@ describe("boardMerger function", () => {
         // Then
         expect(result).toEqual(outputArray);
     });
+
+    test("returns the input array sorted by vendor then name", () => {
+        // Given
+        const inputArray: Board[] = [
+            {
+                name: "C BoardName",
+                vendor: "A Vendor",
+                core: "Core-1",
+                has_wifi: true,
+            },
+            {
+                name: "BoardName",
+                vendor: "B Vendor",
+                core: "Core-2",
+                has_wifi: false,
+            },
+            {
+                name: "A BoardName",
+                vendor: "A Vendor",
+                core: "Core-1",
+                has_wifi: true,
+            },
+            {
+                name: "B BoardName",
+                vendor: "A Vendor",
+                core: "Core-2",
+                has_wifi: false,
+            },
+        ];
+        const outputArray: Board[] = [
+            {
+                name: "A BoardName",
+                vendor: "A Vendor",
+                core: "Core-1",
+                has_wifi: true,
+            },
+            {
+                name: "B BoardName",
+                vendor: "A Vendor",
+                core: "Core-2",
+                has_wifi: false,
+            },
+            {
+                name: "C BoardName",
+                vendor: "A Vendor",
+                core: "Core-1",
+                has_wifi: true,
+            },
+            {
+                name: "BoardName",
+                vendor: "B Vendor",
+                core: "Core-2",
+                has_wifi: false,
+            },
+        ];
+    
+        // When
+        const result = boardMerger(inputArray);
+    
+        // Then
+        expect(result).toEqual(outputArray);
+    });
 });
