@@ -1,3 +1,5 @@
-export function boardMerger(exampleBoard: { name: string; vendor: string; core: string; has_wifi: boolean; }) {
-    return exampleBoard;
+import { Board } from "./types";
+
+export function boardMerger(inputBoard: Board) {
+    return inputBoard;
 }
