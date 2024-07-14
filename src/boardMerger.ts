@@ -1,6 +1,6 @@
 import { Board } from "./types";
 
-export function boardMerger(boardArray: Board[]) {
+export function boardMerger(boardArray: Board[]): Board[] {
     if (boardArray.length === 0) {
         return boardArray;
     }
@@ -23,4 +23,11 @@ export function boardMerger(boardArray: Board[]) {
         }
     );
     return inputSortedByVendorThenName;
+}
+
+export function convertBoardsToJson(boardArray: Board[]): string {
+    const outputJson = {
+        boards: boardMerger(boardArray),
+    }
+    return JSON.stringify(outputJson, null, 2);
 }

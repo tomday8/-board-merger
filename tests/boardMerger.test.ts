@@ -1,5 +1,5 @@
 import { Board } from "../src/types";
-import { boardMerger } from "../src/boardMerger"
+import { boardMerger, convertBoardsToJson } from "../src/boardMerger"
 
 describe("boardMerger function", () => {
     // it("accepts and returns a Board", () => {
@@ -34,10 +34,10 @@ describe("boardMerger function", () => {
                 has_wifi: false,
             },
         ];
-    
+
         // When
         const result = boardMerger(inputArray);
-    
+
         // Then
         expect(result).toBe(inputArray);
     });
@@ -72,10 +72,10 @@ describe("boardMerger function", () => {
                 has_wifi: false,
             },
         ];
-    
+
         // When
         const result = boardMerger(inputArray);
-    
+
         // Then
         expect(result).toEqual(outputArray);
     });
@@ -134,10 +134,10 @@ describe("boardMerger function", () => {
                 has_wifi: false,
             },
         ];
-    
+
         // When
         const result = boardMerger(inputArray);
-    
+
         // Then
         expect(result).toEqual(outputArray);
     });
@@ -145,14 +145,14 @@ describe("boardMerger function", () => {
     it("accepts and returns an empty array", () => {
         // Given
         const emptyInput: Board[] = [];
-    
+
         // When
         const result = boardMerger(emptyInput);
-    
+
         // Then
         expect(result).toEqual([]);
     });
-    
+
     it("will throw an error with missing fields in input", () => {
         // Given
         const inputWithEmptyName: Board[] = [
@@ -179,10 +179,56 @@ describe("boardMerger function", () => {
                 has_wifi: true,
             },
         ];
-    
+
         // When,Then
         expect(() => boardMerger(inputWithEmptyName)).toThrow();
         expect(() => boardMerger(inputWithEmptyVendor)).toThrow();
         expect(() => boardMerger(inputWithEmptyCore)).toThrow();
     });
 });
+
+describe("convertBoardsToJson function", () => {
+    it("returns board array as JSON", () => {
+        // Given
+        const inputArray: Board[] = [
+            {
+                name: "BoardName",
+                vendor: "A Vendor",
+                core: "Core-1",
+                has_wifi: true,
+            },
+            {
+                name: "BoardName",
+                vendor: "B Vendor",
+                core: "Core-2",
+                has_wifi: false,
+            },
+        ];
+        const jsonBoards = (
+            {
+                "boards": [
+                    {
+                        "name": "BoardName",
+                        "vendor": "A Vendor",
+                        "core": "Core-1",
+                        "has_wifi": true,
+                    },
+                    {
+                        "name": "BoardName",
+                        "vendor": "B Vendor",
+                        "core": "Core-2",
+                        "has_wifi": false,
+                    }
+                ]
+            }
+        );
+        const jsonOutput = JSON.stringify(jsonBoards, null, 2);
+
+        // When
+        const result = convertBoardsToJson(inputArray);
+
+        // Then
+
+        expect(result).toEqual(jsonOutput);
+    })
+})
