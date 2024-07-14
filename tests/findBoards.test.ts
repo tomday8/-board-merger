@@ -21,4 +21,16 @@ describe("findBoards function", () => {
         // Then
         expect(result).toEqual(expectedResult)
     })
+
+    it("confirms when there's no boards in input", () => {
+        // Given
+        const testFilePath = "./tests/data/example-no-boards.json";
+        const expectedResult = JSON.parse(readFileSync(testFilePath, "utf8"));
+
+        // When
+        const result = findBoards(testFilePath);
+
+        // Then
+        expect(result).toEqual("No boards!")
+    })
 })

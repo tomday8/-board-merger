@@ -1,0 +1,16 @@
+{
+    "no-boards": [
+        {
+            "name": "A7-9000X",
+            "vendor": "BoardStore",
+            "core": "Cortex-M7",
+            "has_wifi": true
+        },
+        {
+            "name": "Generic",
+            "vendor": "BoardStore",
+            "core": "Cortex-M0+",
+            "has_wifi": false
+        }
+    ]
+}
