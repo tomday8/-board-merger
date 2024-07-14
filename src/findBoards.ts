@@ -10,10 +10,18 @@ export function findBoards(directoryPath: string) {
 
     for (const file of files) {
         const filePath = path.join(directoryPath, file);
-        const fileData = readFileSync(filePath);
-        const jsonData = JSON.parse(fileData.toString());
-        if (jsonData.boards) {
-            allBoards.push(...jsonData.boards);;
+        try {
+            const fileData = readFileSync(filePath);
+            const jsonData = JSON.parse(fileData.toString());
+            if (jsonData.boards) {
+                allBoards.push(...jsonData.boards);;
+            }
+        } catch (error) {
+            if (error instanceof SyntaxError) {
+                console.error(`Invalid JSON syntax in file: ${filePath}`, error);
+            } else {
+                console.error(`Error reading file: ${filePath}`, error);
+            }
         }
     }
 
