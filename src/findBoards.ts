@@ -17,10 +17,10 @@ export function findBoards(directoryPath: string) {
         }
     }
 
-    let mergedJsonOutput;
     if (allBoards.length > 0) {
-        mergedJsonOutput = convertBoardsToJson(allBoards);
+        const mergedJsonOutput = convertBoardsToJson(allBoards);
+        console.log(mergedJsonOutput);
+    } else {
+        console.log("No boards identified!");
     }
-
-    return (mergedJsonOutput) ? mergedJsonOutput : "No boards identified!";
 }

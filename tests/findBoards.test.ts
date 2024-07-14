@@ -1,7 +1,21 @@
-import { readFileSync } from "fs";
 import { findBoards } from "../src/findBoards";
 
 describe("findBoards function", () => {
+    let originalConsoleLog = console.log;
+    let capturedOutput = "";
+
+    beforeEach(() => {
+        originalConsoleLog = console.log;
+        console.log = jest.fn((output) => {
+            capturedOutput += output;
+        });
+    });
+
+    afterEach(() => {
+        console.log = originalConsoleLog;
+        capturedOutput = "";
+    });
+
     it("receives a directory path as input", () => {
         // Given
         const directoryPath = "./tests/data";
@@ -10,27 +24,16 @@ describe("findBoards function", () => {
         expect(() => findBoards(directoryPath)).not.toThrow();
     })
 
-    it.skip("returns json from reading the file", () => {
-        // Given
-        const testFilePath = "./tests/data";
-        const expectedResult = JSON.parse(readFileSync(testFilePath, "utf8"));
-
-        // When
-        const result = findBoards(testFilePath);
-
-        // Then
-        expect(result).toEqual(expectedResult)
-    })
-
     it("confirms when there's no boards in input", () => {
         // Given
         const testFilePath = "./tests/data/noValidBoards";
+        const expectedOutput = "No boards identified!"
 
         // When
-        const result = findBoards(testFilePath);
+        findBoards(testFilePath);
 
         // Then
-        expect(result).toEqual("No boards identified!")
+        expect(capturedOutput).toEqual(expectedOutput);
     })
 
     it("outputs correct json from input file", () => {
@@ -60,9 +63,9 @@ describe("findBoards function", () => {
             , null, 2)
 
         // When
-        const result = findBoards(testFilePath);
+        findBoards(testFilePath);
 
         // Then
-        expect(result).toEqual(jsonOutput);
+        expect(capturedOutput).toEqual(jsonOutput);
     })
 })
