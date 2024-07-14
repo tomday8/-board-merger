@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import { findBoards } from "./findBoards";
 import { Command } from "commander";
 import figlet from "figlet";

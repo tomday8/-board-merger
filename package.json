@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A CLI for merging JSON boards",
   "main": "index.js",
+  "bin": {
+    "boardmerger": "./dist/cliProgram.js"
+  },
   "scripts": {
     "build": "npx tsc",
     "test": "jest"
