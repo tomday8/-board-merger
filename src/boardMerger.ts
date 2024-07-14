@@ -26,8 +26,16 @@ export function boardMerger(boardArray: Board[]): Board[] {
 }
 
 export function convertBoardsToJson(boardArray: Board[]): string {
+    const sortedBoards = boardMerger(boardArray);
+    const totalVendors = new Set(sortedBoards.map(board => board.vendor)).size;
+    const totalBoards = sortedBoards.length;
+
     const outputJson = {
-        boards: boardMerger(boardArray),
+        boards: sortedBoards,
+        _metadata: {
+            total_vendors: totalVendors,
+            total_boards: totalBoards,
+        },
     }
     return JSON.stringify(outputJson, null, 2);
 }

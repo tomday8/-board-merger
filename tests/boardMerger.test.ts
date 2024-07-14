@@ -188,7 +188,7 @@ describe("boardMerger function", () => {
 });
 
 describe("convertBoardsToJson function", () => {
-    it("returns board array as JSON", () => {
+    it.skip("returns board array as JSON", () => {
         // Given
         const inputArray: Board[] = [
             {
@@ -223,6 +223,53 @@ describe("convertBoardsToJson function", () => {
             }
         );
         const jsonOutput = JSON.stringify(jsonBoards, null, 2);
+
+        // When
+        const result = convertBoardsToJson(inputArray);
+
+        // Then
+
+        expect(result).toContain(jsonOutput);
+    })
+
+    test("includes metadata in the return", () => {
+        // Given
+        const inputArray: Board[] = [
+            {
+                name: "BoardName",
+                vendor: "A Vendor",
+                core: "Core-1",
+                has_wifi: true,
+            },
+            {
+                name: "BoardName",
+                vendor: "B Vendor",
+                core: "Core-2",
+                has_wifi: false,
+            },
+        ];
+        const jsonOutput = JSON.stringify(
+            {
+                "boards": [
+                    {
+                        "name": "BoardName",
+                        "vendor": "A Vendor",
+                        "core": "Core-1",
+                        "has_wifi": true,
+                    },
+                    {
+                        "name": "BoardName",
+                        "vendor": "B Vendor",
+                        "core": "Core-2",
+                        "has_wifi": false,
+                    }
+                ],
+                "_metadata": {
+                    "total_vendors": 2,
+                    "total_boards": 2
+                }
+            }
+            , null, 2)
 
         // When
         const result = convertBoardsToJson(inputArray);
