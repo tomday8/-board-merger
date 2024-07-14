@@ -80,7 +80,7 @@ describe("boardMerger function", () => {
         expect(result).toEqual(outputArray);
     });
 
-    test("returns the input array sorted by vendor then name", () => {
+    it("returns the input array sorted by vendor then name", () => {
         // Given
         const inputArray: Board[] = [
             {
@@ -140,5 +140,49 @@ describe("boardMerger function", () => {
     
         // Then
         expect(result).toEqual(outputArray);
+    });
+
+    it("accepts and returns an empty array", () => {
+        // Given
+        const emptyInput: Board[] = [];
+    
+        // When
+        const result = boardMerger(emptyInput);
+    
+        // Then
+        expect(result).toEqual([]);
+    });
+    
+    it("will throw an error with missing fields in input", () => {
+        // Given
+        const inputWithEmptyName: Board[] = [
+            {
+                name: "",
+                vendor: "A Vendor",
+                core: "Core-1",
+                has_wifi: true,
+            },
+        ];
+        const inputWithEmptyVendor: Board[] = [
+            {
+                name: "A Name",
+                vendor: "",
+                core: "Core-1",
+                has_wifi: true,
+            },
+        ];
+        const inputWithEmptyCore: Board[] = [
+            {
+                name: "A Name",
+                vendor: "A Vendor",
+                core: "",
+                has_wifi: true,
+            },
+        ];
+    
+        // When,Then
+        expect(() => boardMerger(inputWithEmptyName)).toThrow();
+        expect(() => boardMerger(inputWithEmptyVendor)).toThrow();
+        expect(() => boardMerger(inputWithEmptyCore)).toThrow();
     });
 });

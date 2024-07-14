@@ -1,6 +1,17 @@
 import { Board } from "./types";
 
 export function boardMerger(boardArray: Board[]) {
+    if (boardArray.length === 0) {
+        return boardArray;
+    }
+
+    for (const board of boardArray) {
+        if (board.name === "" || board.vendor === "" || board.core === "") {
+            // TODO: Create a custom error e.g. EmptyStringError
+            throw new Error("Board detected with empty fields!");
+        }
+    }
+
     const inputSortedByVendorThenName: Board[] = boardArray.sort(
         (boardA, boardB) => {
             const vendorComparison = boardA.vendor.localeCompare(boardB.vendor);
