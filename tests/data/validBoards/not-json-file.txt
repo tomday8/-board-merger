@@ -1,0 +1,16 @@
+{
+    "boards": [
+        {
+            "name": "A7-400X",
+            "vendor": "Boards 2 U",
+            "core": "Cortex-M7",
+            "has_wifi": true
+        },
+        {
+            "name": "Lower_Power",
+            "vendor": "A Tech Corp.",
+            "core": "Cortex-M0+",
+            "has_wifi": false
+        }
+    ]
+}

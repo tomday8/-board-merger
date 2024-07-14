@@ -2,17 +2,17 @@ import { readFileSync } from "fs";
 import { findBoards } from "../src/findBoards";
 
 describe("findBoards function", () => {
-    it("receives a file path as input", () => {
+    it("receives a directory path as input", () => {
         // Given
-        const testFilePath = "./tests/data/example-boards.json";
+        const directoryPath = "./tests/data";
 
         // When,Then
-        expect(() => findBoards(testFilePath)).not.toThrow();
+        expect(() => findBoards(directoryPath)).not.toThrow();
     })
 
     it.skip("returns json from reading the file", () => {
         // Given
-        const testFilePath = "./tests/data/example-boards.json";
+        const testFilePath = "./tests/data";
         const expectedResult = JSON.parse(readFileSync(testFilePath, "utf8"));
 
         // When
@@ -24,7 +24,7 @@ describe("findBoards function", () => {
 
     it("confirms when there's no boards in input", () => {
         // Given
-        const testFilePath = "./tests/data/example-no-boards.json";
+        const testFilePath = "./tests/data/noValidBoards";
 
         // When
         const result = findBoards(testFilePath);
@@ -35,7 +35,7 @@ describe("findBoards function", () => {
 
     it("outputs correct json from input file", () => {
         // Given
-        const testFilePath = "./tests/data/example-boards.json";
+        const testFilePath = "./tests/data/validBoards";
         const jsonOutput = JSON.stringify(
             {
                 "boards": [
