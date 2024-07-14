@@ -1,8 +1,17 @@
 import { readFileSync } from "fs";
-import { JsonableValue } from "ts-jest";
+import { Board } from "./types";
+import { convertBoardsToJson } from "./boardMerger";
 
-export function findBoards(filepath: any) {
+export function findBoards(filepath: string) {
     const fileData = readFileSync(filepath);
     const jsonData = JSON.parse(fileData.toString());
-    return (jsonData.boards) ? jsonData : "No boards!";
+    const allBoards: Board[] = [];
+    let mergedJsonOutput;
+
+    if (jsonData.boards) {
+        allBoards.push(...jsonData.boards);
+        mergedJsonOutput = convertBoardsToJson(allBoards);
+    }
+
+    return (mergedJsonOutput) ? mergedJsonOutput : "No boards identified!";
 }
