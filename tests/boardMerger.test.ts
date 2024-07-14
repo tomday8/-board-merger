@@ -2,22 +2,6 @@ import { Board } from "../src/types";
 import { boardMerger, convertBoardsToJson } from "../src/boardMerger"
 
 describe("boardMerger function", () => {
-    // it("accepts and returns a Board", () => {
-    //     // Given
-    //     const exampleBoard: Board = {
-    //         name: "BoardName",
-    //         vendor: "A Vendor",
-    //         core: "Core-1",
-    //         has_wifi: true,
-    //     };
-
-    //     // When
-    //     const result = boardMerger(exampleBoard);
-
-    //     // Then
-    //     expect(result).toBe(exampleBoard);
-    // });
-
     it("accepts and returns an array of Boards", () => {
         // Given
         const inputArray: Board[] = [
@@ -188,51 +172,7 @@ describe("boardMerger function", () => {
 });
 
 describe("convertBoardsToJson function", () => {
-    it.skip("returns board array as JSON", () => {
-        // Given
-        const inputArray: Board[] = [
-            {
-                name: "BoardName",
-                vendor: "A Vendor",
-                core: "Core-1",
-                has_wifi: true,
-            },
-            {
-                name: "BoardName",
-                vendor: "B Vendor",
-                core: "Core-2",
-                has_wifi: false,
-            },
-        ];
-        const jsonBoards = (
-            {
-                "boards": [
-                    {
-                        "name": "BoardName",
-                        "vendor": "A Vendor",
-                        "core": "Core-1",
-                        "has_wifi": true,
-                    },
-                    {
-                        "name": "BoardName",
-                        "vendor": "B Vendor",
-                        "core": "Core-2",
-                        "has_wifi": false,
-                    }
-                ]
-            }
-        );
-        const jsonOutput = JSON.stringify(jsonBoards, null, 2);
-
-        // When
-        const result = convertBoardsToJson(inputArray);
-
-        // Then
-
-        expect(result).toContain(jsonOutput);
-    })
-
-    test("includes metadata in the return", () => {
+    it("returns board array as JSON and includes metadata", () => {
         // Given
         const inputArray: Board[] = [
             {
